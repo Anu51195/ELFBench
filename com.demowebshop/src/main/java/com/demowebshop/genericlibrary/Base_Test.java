@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -41,12 +42,16 @@ public class Base_Test extends FrameworkLibrary {
 	@BeforeSuite
 	 public void reportConfig() {
 		sparkReporter=new ExtentSparkReporter(EXTENT_PATH+name());
-		reports=new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		
 	}
 	@AfterSuite
 	public void reportFlush() {
 		reports.flush();
+	}
+	@BeforeClass
+	public void reportstart() {
+		reports=new ExtentReports();
+		reports.attachReporter(sparkReporter);
 	}
 	
 }
